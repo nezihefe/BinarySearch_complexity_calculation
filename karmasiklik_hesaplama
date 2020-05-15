@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int main(int argc, char *argv[]) {
+	int i,j,k,sayi,boyut,aranacak;
+	clock_t start_t, end_t, total_t;
+	printf("Dizi boyutunu giriniz : ");
+	scanf("%d", &boyut);
+	double dizi[boyut];
+	for(k=0;k<boyut;k++){
+      sayi=1+(rand()%999999);
+         dizi[k]=sayi;
+      }
+       int gecici;
+    for (i=0; i<(boyut-1); i++){
+        for (j=0; j<boyut-i-1; j++){
+            if (dizi[j]>dizi[j+1]){
+            // küçükten büyüğe sıralama
+                gecici = dizi[j]; 
+                dizi[j] = dizi[j+1];
+                dizi[j+1] = gecici;
+            }
+}
+    }
+	for(j=0;j<boyut;j++){
+		printf("%d\n",dizi[j]);
+	}
+	printf("Aranacak degeri giriniz:\n");
+	scanf("%d",&aranacak);
+	clock_t start, end;
+    start_t = clock();
+	arama(dizi,boyut,aranacak);
+	end_t = clock();
+	total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+    printf("Gecen süre:%ld\n", end_t);	
+return 0;
+}
+
+int arama(double AranacakDizi[],int Aboyut,int n){
+	        int a = 1;
+            int eb = Aboyut;
+            int ek = -1;
+            int bayrak = 0;    
+            while (eb-ek>1)
+            {
+                int bakilan = (eb + ek) / 2;
+                if (AranacakDizi[bakilan] == n)
+                {
+                    bayrak = 1;
+                    printf("Sayi dizide var...\n");
+                    break;
+                }
+                else if (AranacakDizi[bakilan] < n)
+                {
+                    ek = bakilan;
+                }
+                else
+                {
+                    eb = bakilan;
+                }
+                a += 1;
+            }        
+          
+            if (bayrak == 0)
+            {
+                printf("Sayi bulunamadi.");
+            }
+            printf("Hamle sayısı: %d\n",a);
+            return a;
+        }
